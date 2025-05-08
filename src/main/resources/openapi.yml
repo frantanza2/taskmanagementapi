@@ -1,0 +1,50 @@
+openapi: 3.0.1
+info:
+  title: API de Gestión de Tareas
+  version: 1.0.0
+paths:
+  /api/auth/login:
+    post:
+      summary: Autenticación de usuarios
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '200':
+          description: Token JWT generado
+  /api/tareas:
+    get:
+      summary: Listar todas las tareas
+      responses:
+        '200':
+          description: Lista de tareas
+    post:
+      summary: Crear una nueva tarea
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Tarea'
+      responses:
+        '201':
+          description: Tarea creada
+components:
+  schemas:
+    Tarea:
+      type: object
+      properties:
+        descripcion:
+          type: string
+        estado:
+          type: string
+        usuario:
+          type: string
