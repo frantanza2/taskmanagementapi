@@ -1,64 +1,72 @@
-# TaskManagement API
+# Task Management API
 
-API RESTful construida con Spring Boot 3.4.x y Java 17 para la gestión de tareas. Incluye autenticación JWT, documentación OpenAPI y base de datos H2.
+Esta es una API RESTful para la gestión de tareas. Permite realizar operaciones CRUD sobre tareas, autenticar usuarios con JWT, documentar con Swagger y usar una base de datos en memoria (H2). Incluye pruebas unitarias con JUnit y Mockito.
 
-## 🚀 Tecnologías
+## Tecnologías
 
 - Java 17
 - Spring Boot 3.4.x
-- Spring Security
-- JWT (JSON Web Token)
-- H2 Database
+- Spring Security con JWT
+- H2 Database (en memoria)
 - Swagger / OpenAPI
-- Maven
+- JUnit 5, Mockito
+- Postman Collection
 
-## ⚙️ Ejecución del proyecto
+## Funcionalidades
 
-### 1. Requisitos
+- Login de usuario y generación de token JWT (`/api/auth/login`)
+- Listar, crear, actualizar y eliminar tareas (`/api/tasks`)
+- Control de acceso a rutas mediante token JWT
+- Datos precargados en H2 (usuarios y estados de tarea)
+- Documentación Swagger (`/swagger-ui.html`)
 
-- JDK 17
-- Maven 3.x
+## Autenticación
 
-### 2. Clonar y ejecutar
-
-```bash
-mvn spring-boot:run
-```
-
-### 3. Acceso
-
-- Swagger UI: [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
-- H2 Console: [http://localhost:8080/h2-console](http://localhost:8080/h2-console)
-  - JDBC URL: `jdbc:h2:mem:taskdb`
-  - Usuario: `sa`
-
-## 🔐 Login de prueba
+1. Realiza un `POST` a `/api/auth/login` con el siguiente body:
 
 ```json
-POST /api/auth/login
 {
   "username": "admin",
   "password": "admin123"
 }
 ```
 
-## 📋 Endpoints protegidos
+2. Recibirás un token JWT como respuesta. Úsalo en los siguientes requests como header:
 
-- `GET /api/tareas`
-- `POST /api/tareas`
+```
+Authorization: Bearer <token>
+```
 
-Usar el token JWT retornado al hacer login.
+## Base de Datos H2
 
-## 📁 Documentación API First
+URL: `http://localhost:8080/h2-console`  
+JDBC URL: `jdbc:h2:mem:testdb`  
+Usuario: `sa`  
+Password: *(vacío)*
+
+## Documentación Swagger
+
+Disponible en: [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
+
+## Collection Postman
+
+Se incluye el archivo `TaskManagementCRUD.postman_collection.json` con variables y scripts para autenticación automática.
+
+## Ejecutar el proyecto
+
+```bash
+mvn clean spring-boot:run
+```
+## Documentación API First
 
 - Archivo: `src/main/resources/openapi.yml`
 - Plugin OpenAPI incluido en `pom.xml`
 
-## 🧪 Colección Postman
+## Colección Postman
 
 Incluida en el archivo `taskmanagementapi_postman_collection.json`
 
-## 🙋 Autora
+## Autora
 
 **Francisca Martínez**  
 Cargo postulado: Desarrolladora de Software Java  

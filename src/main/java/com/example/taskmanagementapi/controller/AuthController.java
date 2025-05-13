@@ -35,7 +35,6 @@ public class AuthController {
             response.put("token", token);
             return ResponseEntity.ok(response);
         } catch (AuthenticationException e) {
-            e.printStackTrace();
             return ResponseEntity.status(401).body("Credenciales invalidas");
         }
     }

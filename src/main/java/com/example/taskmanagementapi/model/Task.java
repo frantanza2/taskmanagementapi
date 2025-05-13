@@ -1,19 +1,20 @@
 package com.example.taskmanagementapi.model;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 @Entity
-public class Tarea {
+@Data
+public class Task {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String descripcion;
+
+    private String title;
+    private String description;
 
     @ManyToOne
-    private User user;
-
-    @ManyToOne
-    private EstadoTarea estado;
-
-    // Getters and setters
+    @JoinColumn(name = "status_id")
+    private TaskStatus status;
 }
